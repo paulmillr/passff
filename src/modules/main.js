@@ -166,18 +166,17 @@ var PassFF = (function () {
           switch (PassFF.mode) {
             case "content":
               return PassFF.Page.init();
-              break;
             case "itemPicker":
             case "menu":
               return PassFF.Menu.init();
-              break;
             case "background":
               PassFF.Auth.init();
               browser.contextMenus.onClicked.addListener(onContextMenuClick);
-              browser.tabs.onUpdated.addListener(onTabUpdated);
-              browser.tabs.onActivated.addListener(onTabActivated);
+              // browser.tabs.onUpdated.addListener(onTabUpdated);
+              // browser.tabs.onActivated.addListener(onTabActivated);
               browser.windows.onFocusChanged.addListener(onWindowFocus);
-              return onTabActivated();
+              // return onTabActivated();
+              // return;
               break;
           }
         });
@@ -186,11 +185,11 @@ var PassFF = (function () {
     refresh_all: background_function("refresh_all", function () {
       return PassFF.Preferences.init()
         .then(() => PassFF.Pass.init())
-        .then(() => onTabActivated())
+        // .then(() => onTabActivated())
         .then(() => browser.runtime.sendMessage("refresh"))
-        .then(() => browser.tabs.query({}))
+        // .then(() => browser.tabs.query({}))
         .then((tabs) => {
-            tabs.forEach((t) => browser.tabs.sendMessage(t.id, "refresh"));
+            // tabs.forEach((t) => browser.tabs.sendMessage(t.id, "refresh"));
         });
     })
   };

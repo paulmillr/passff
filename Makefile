@@ -1,6 +1,7 @@
 
-VERSION := testing
+VERSION := 1.10.0
 
+UNAME_S := $(shell uname -s)
 SRC_DIR := ./src
 TARGET_DIR := ./bin/$(VERSION)
 BUILD_DIR := ./build/$(VERSION)
@@ -24,7 +25,11 @@ all: $(XPI_TARGET)
 
 $(MANIFEST_OUT): $(MANIFEST_SRC) $(BUILD_DIR)/.d
 	cp $(MANIFEST_SRC) $@
+ifeq ($(UNAME_S),Darwin)
+	sed -i "" "s/_VERSIONHOLDER_/$(VERSION)/g" $@
+else
 	sed -i "s/_VERSIONHOLDER_/$(VERSION)/g" $@
+endif
 
 $(CONTENT_OUT): $(BUILD_DIR)/%: $(SRC_DIR)/% $(BUILD_DIR)/.d
 	cp -r $(SRC_DIR)/$* $@

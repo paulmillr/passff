@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "PassFF",
+    "name": "PassFF-hardened",
     "version": "_VERSIONHOLDER_",
-    "description": "Integrates your zx2c4 password store into Firefox",
+    "description": "Hardened secure version of 'pass' CLI tool helper for Firefox. Main difference from nonhardened passff: the addon does not ask to view your tabs or to inject JS to webpages.",
     "default_locale": "en",
 
     "icons": {
@@ -21,8 +21,6 @@
     },
 
     "permissions": [
-        "<all_urls>",
-        "tabs",
         "storage",
         "nativeMessaging",
         "clipboardWrite",
@@ -47,20 +45,6 @@
         ]
     },
 
-    "content_scripts": [{
-        "matches": ["<all_urls>"],
-        "run_at": "document_start",
-        "js": [
-            "modules/util.js",
-            "modules/main.js",
-            "modules/preferences.js",
-            "modules/pass.js",
-            "modules/page.js"
-        ],
-        "css": [ "skin/content.css" ],
-        "all_frames": true
-    }],
-
     "commands": {
         "_execute_browser_action": {
             "suggested_key": {
@@ -78,7 +62,7 @@
 
     "applications": {
         "gecko": {
-            "id": "passff@invicem.pro",
+            "id": "passff@paulmillr.com",
             "strict_min_version": "50.0"
         }
     }

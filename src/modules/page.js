@@ -861,7 +861,7 @@ PassFF.Page = (function () {
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%% Miscellaneous %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    copyToClipboard: content_function("Page.copyToClipboard", function (text) {
+    copyToClipboard: background_function("Page.copyToClipboard", function (text) {
       document.addEventListener("copy", function oncopy(event) {
         document.removeEventListener("copy", oncopy, true);
         event.stopImmediatePropagation();
